@@ -9,11 +9,14 @@ export default class TourList extends Component {
 	}
 
 	removeTour = (id) => {
-		console.log(id)
+		const {tours} = this.state
+		const filteredTours = tours.filter(tour => tour.id !== id)
+		this.setState({
+			tours: filteredTours
+		})
 	}
 
 	render() {
-		//console.log(this.state.tours)
 		const {tours} = this.state
 
 		return (

@@ -1,9 +1,18 @@
 import React, {Component} from "react"
 import "./Tour.scss"
 
-export default class Tour extends Component {
+class Tour extends Component {
+	state = {
+		showInfo: false,
+	}
+
+	handleInfo = () => {
+		this.setState({
+			showInfo: !this.state.showInfo,
+		})
+	}
+
 	render() {
-		//console.log(this.props)
 		const {id, city, img, name, info} = this.props.tour
 		const {removeTour} = this.props
 
@@ -11,24 +20,25 @@ export default class Tour extends Component {
 			<article className="tour">
 				<div className="img-container">
 					<img src={img} alt="The City Tour" />
-					<span className="close-btn">
+					<span className="close-btn" onClick={() => removeTour(id)}>
 						<i className="fad fa-times-circle"></i>
 					</span>
 				</div>
 				<div className="tour-info">
 					<h3>{city}</h3>
 					<h4>
-						<i class="fal fa-shuttle-van"></i> {name}
+						<i className="fal fa-shuttle-van"></i> {name}
 					</h4>
 					<h5>
 						more info{" "}
-						<span>
+						<span onClick={this.handleInfo}>
 							<i className="fal fa-angle-down"></i>
 						</span>
 					</h5>
-					<p>{info}</p>
+					{this.state.showInfo && <p>{info}</p>}
 				</div>
 			</article>
 		)
 	}
 }
+export default Tour
